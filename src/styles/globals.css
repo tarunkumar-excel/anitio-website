@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── DESIGN TOKENS ───────────────────────────────────────────────── */
+:root {
+  --navy:       #0f1f4a;
+  --blue:       #1d4ed8;
+  --blue-light: #3b82f6;
+  --gold:       #f59e0b;
+  --gold-dark:  #d97706;
+  --white:      #ffffff;
+  --gray-50:    #f8fafc;
+  --gray-100:   #f1f5f9;
+  --gray-600:   #475569;
+  --gray-900:   #0f172a;
+}
+
+/* ─── BASE ────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--gray-900);
+  background: #fff;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
+
+/* ─── SCROLLBAR ───────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+/* ─── COMPONENTS ──────────────────────────────────────────────────── */
+@layer components {
+  .btn-primary {
+    @apply bg-gold-500 hover:bg-gold-600 text-white font-semibold px-6 py-3 rounded-lg
+           transition-all duration-300 shadow-gold hover:shadow-lg hover:-translate-y-0.5
+           inline-flex items-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply bg-primary-700 hover:bg-primary-800 text-white font-semibold px-6 py-3 rounded-lg
+           transition-all duration-300 shadow-blue hover:shadow-lg hover:-translate-y-0.5
+           inline-flex items-center gap-2;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary-700 text-primary-700 hover:bg-primary-700 hover:text-white
+           font-semibold px-6 py-3 rounded-lg transition-all duration-300
+           inline-flex items-center gap-2;
+  }
+
+  .btn-ghost {
+    @apply text-primary-700 hover:bg-primary-50 font-semibold px-4 py-2 rounded-lg
+           transition-all duration-200 inline-flex items-center gap-2;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-card hover:shadow-card-lg transition-all duration-300 overflow-hidden;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-primary-900 leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-gold-500 font-semibold text-sm uppercase tracking-widest mb-3;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+           transition-all duration-200 placeholder:text-gray-400 text-sm;
+  }
+
+  .select-field {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+           transition-all duration-200 text-sm appearance-none cursor-pointer;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold;
+  }
+
+  .badge-gold  { @apply badge bg-gold-100 text-gold-700; }
+  .badge-blue  { @apply badge bg-primary-100 text-primary-700; }
+  .badge-green { @apply badge bg-green-100 text-green-700; }
+  .badge-red   { @apply badge bg-red-100 text-red-700; }
+
+  .nav-link {
+    @apply text-gray-700 hover:text-primary-700 font-medium transition-colors duration-200
+           relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5
+           after:bg-gold-500 after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  .gold-underline {
+    @apply relative inline-block after:absolute after:bottom-0 after:left-0 after:w-full
+           after:h-1 after:bg-gold-500 after:rounded-full;
+  }
+
+  .glass {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-700 via-primary-500 to-gold-500 bg-clip-text text-transparent;
+  }
+}
+
+/* ─── TICKER ──────────────────────────────────────────────────────── */
+.ticker-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-content {
+  display: inline-block;
+  animation: ticker 40s linear infinite;
+}
+.ticker-content:hover { animation-play-state: paused; }
+
+/* ─── ANIMATIONS ──────────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-16px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-pulse-ring { animation: pulse-ring 2s ease-out infinite; }
+.animate-slide-in-left { animation: slideInLeft 0.7s ease-out; }
+.animate-slide-in-right { animation: slideInRight 0.7s ease-out; }
+
+/* ─── PRINT ───────────────────────────────────────────────────────── */
+@media print {
+  nav, footer, .no-print { display: none !important; }
+  body { color: #000; }
+}
